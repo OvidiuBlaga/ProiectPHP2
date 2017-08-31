@@ -1,0 +1,79 @@
+Descriere aplicatie.
+Ne propunem sa cream o aplicatie care sa reflecte activitatea 
+intr-o firma de logistica-transport-carburant de la rafinarii la benzinarii.
+
+Scenariu (Identificarea entitatilor):
+
+1. Un magazin virtual vinde produse (PRODUCTS).
+Un produs poate fi definit prin:
+	id;
+        name;
+        description;
+	price;
+        quantity;
+        date_add;
+        date_upd;
+	
+2. Un produs poate avea una sau mai multe imagini (IMAGES).
+O imagine poate fi definita prin:
+	id;
+        id_product;
+        description; (pentru atributul ALT folosit in HTML)
+        url;
+        date_add;
+        date_upd;
+	
+3. Un produs apartine uneia sau mai multor categorii si invers (CATEGORY).
+O categorie poate fi definita prin:
+	id;
+        name;
+        description;
+        date_add;
+        date_upd;
+        
+4. Un produs se poate afla in mai multe categorii (PRODUCT_CATEGORY)
+
+        id_product;
+        id_category;
+        
+5. CUSTOMERS
+	id;
+        name;
+        address;
+        date_add;
+        date_upd;
+        
+6. CARTS
+        id;
+        id_customers;
+        date_add;
+        date_upd;
+        
+7. PRODUCTS_CART 
+        id;
+        id_product;
+        id_cart;
+        quantity;
+        
+8. ORDERS
+        id;
+        id_cart;
+        total_amount;
+        TVA;
+        
+9. USERS
+
+CREATE TABLE IF NOT EXISTS `users` (
+  `uid` int(11) NOT NULL AUTO_INCREMENT,
+  `username` char(20) NOT NULL,
+  `pw` varchar(255) NOT NULL,
+  `first_name` char(20) NOT NULL,
+  `last_name` char(20) NOT NULL,
+  `privilegies` set('normal','operator','admin') NOT NULL,
+  `email` char(40) NOT NULL,
+  `date_add` DATETIME NOT NULL,
+  `date_upd` DATETIME NOT NULL,
+  PRIMARY KEY (`uid`),
+  UNIQUE KEY `username` (`username`),
+  UNIQUE KEY `email` (`email`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
